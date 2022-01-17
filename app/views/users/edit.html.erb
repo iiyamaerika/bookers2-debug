@@ -6,9 +6,9 @@
     <h2>User info</h2>
     <%= form_with model:@user, local:true do |f| %>
 
-    <div id="error_explanation">
+   
       <%= render 'layouts/errors', obj: @user %>
-    </div>
+    
 
       <div class="form-group">
         <%= f.label :name %>
