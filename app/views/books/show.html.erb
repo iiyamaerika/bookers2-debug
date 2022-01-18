@@ -28,57 +28,17 @@
                 <%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%>
             </td>
           <% else %>
-            
-            <% if @book.favorited_by?(current_user) %>
-              <td>
-                <%= link_to book_favorites_path(@book),  method: :delete do %>
-                ♥<%= @book.favorites.count %>
-                <% end %>
-              </td>
-            <% else %>
-              <td>
-                <%= link_to book_favorites_path(@book), method: :post do %>
-                ♡<%= @book.favorites.count %>
-                <% end %>
-              </td>
-           <% end %>
-            
+          
+            <td><%= render "favorites/btn", book: @book %></td>
             <td>コメント数：<%= @book.post_comments.count %></td>
           <% end %>
         </tr>
         <tr>
         </tr>
       </table>
-
-
-          
-            <% @book.post_comments.each do |post_comment| %>
-              <div class='row'>
-                <div class='col-md-3'>
-                  <%= link_to(post_comment.user) do%>
-                    <%= image_tag post_comment.user.get_profile_image("100x100") %><br>
-                    <%= post_comment.user.name %>
-                  <% end %>
-                </div>
-                <div class='col-md-1'>
-                  <%= post_comment.comment %>
-                </div>
-                <div class='col-md-1'>
-                  <% if post_comment.user == current_user %>
-                  <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete , class: "btn btn-sm btn-danger" %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-
-
-      <div>
-        <%= form_with model: [@book, @post_comment], local: true do |f| %>
-          <%= f.text_area :comment, rows: '5' %><br>
-          <%= f.submit "送信" %>
-        <% end %>
-      </div>
-
+       
+      <%= render "post_comments/index", book: @book %>
+      <%= render "post_comments/form", book: @book, post_comment: @post_comment %>
 
     </div>
   </div>
