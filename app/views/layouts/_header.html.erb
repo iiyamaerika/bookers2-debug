@@ -28,7 +28,7 @@
               <i class="fas fa-sign-out-alt"></i> logout
             <% end %>
           </li>
-          
+
         <% else %>
           <li>
             <%= link_to root_path,class: 'nav-link text-light' do %>
@@ -55,4 +55,13 @@
       </div>
     </div>
   </nav>
+
+  <div class='container px-5 px-sm-0'>
+    <div class='row'>
+      <div class='col-md-12 text-center'>
+        <%= render 'searches/search' %>
+      </div>
+    </div>
+  </div>
+  
 </header>
