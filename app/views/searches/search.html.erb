@@ -23,7 +23,7 @@
   <% else %>
 
 
-      <% @books.each do |book| %>
+
     <thead>
       <tr>
         <th></th>
@@ -33,6 +33,7 @@
       </tr>
     </thead>
     <tbody>
+      <% @books.each do |book| %>
         <tr>
           <td><%= link_to user_path(book.user) do %>
           <%= image_tag book.user.get_profile_image("50x50") %>
