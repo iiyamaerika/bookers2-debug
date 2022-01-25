@@ -7,6 +7,12 @@ class Book < ApplicationRecord
   
   has_many :view_counts, dependent: :destroy
 
+  scope :created_today, -> { where(created_at: Time.zone.now.all_day) } # 今日
+  scope :created_yesterday, -> { where(created_at: 1.day.ago.all_day) } # 前日
+  scope :created_week, -> { where(created_at: Time.zone.now.all_week) } # 今週
+  scope :created_prev_week, -> { where(created_at: 7.day.ago.all_week) } # 先週
+  
+
 
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
