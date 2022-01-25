@@ -4,6 +4,10 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+      unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
+        current_user.view_counts.create(book_id: @book.id)
+      end
+    
     @book_new = Book.new
     @post_comment = PostComment.new
   end
@@ -16,6 +20,7 @@ class BooksController < ApplicationController
       a.favorites_users.includes(:favorites).where(created_at: from...to).size
     }
     @book = Book.new
+    
 
   end
 
