@@ -15,10 +15,11 @@ class GroupsController < ApplicationController
     @book = Book.new
     @group = Group.find(params[:id])
   end
-  
+
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @group.users << current_user
     if @group.save
       redirect_to groups_path
     else
@@ -50,5 +51,5 @@ class GroupsController < ApplicationController
       redirect_to groups_path
     end
   end
-  
+
 end
