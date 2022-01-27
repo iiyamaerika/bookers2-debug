@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
   
   has_many :view_counts, dependent: :destroy
+  
+  has_many :group_users, dependent: :destroy
+  
 
 
   # フォローをした、されたの関係
