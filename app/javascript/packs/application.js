@@ -9,6 +9,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import jQuery from "jquery"
+
 import "popper.js"
 import "bootstrap"
 import Chart from 'chart.js/auto';
@@ -21,5 +22,7 @@ Turbolinks.start()
 ActiveStorage.start()
 
 global.$ = jQuery;
-window.$ = jQuery;
+window.$ = window.jQuery = require('jquery'); 
 global.Chart = Chart;
+
+require('packs/raty')

@@ -7,7 +7,7 @@ class BooksController < ApplicationController
       unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
         current_user.view_counts.create(book_id: @book.id)
       end
-    
+
     @book_new = Book.new
     @post_comment = PostComment.new
   end
@@ -20,7 +20,7 @@ class BooksController < ApplicationController
       a.favorites_users.includes(:favorites).where(created_at: from...to).size
     }
     @book = Book.new
-    
+
 
   end
 
@@ -62,6 +62,14 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :rate)
   end
+
+  def ensure_correct_user
+    @book = Book.find(params[:id])
+    unless @book.user == current_user
+      redirect_to books_path
+    end
+  end
+
 end
