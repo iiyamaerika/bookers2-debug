@@ -20,7 +20,8 @@ class BooksController < ApplicationController
       a.favorites_users.includes(:favorites).where(created_at: from...to).size
     }
     @book = Book.new
-
+    
+    @books = Book.all.order(params[:sort])
 
   end
 
